@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E5E5E5"
+    tools:context=".AuthActivity">
+
+    <!-- Top Curved Background -->
+    <View
+        android:id="@+id/topBackground"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:background="@drawable/bg_top_half"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Decorative Circle 1 -->
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/auth_shape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="1dp" />
+
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/circle_mask"
+        android:clipToOutline="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/students"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!-- Hello + Full Name Texts (Above CardView, Left-Aligned) -->
+
+    <TextView
+        android:id="@+id/helloNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="64dp"
+        android:text="Hello,"
+        android:textSize="30sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/splashCard"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/fullNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="John Doe"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/helloNameView"
+        app:layout_constraintStart_toStartOf="@id/helloNameView"
+        app:layout_constraintBottom_toTopOf="@id/splashCard"
+        android:layout_marginBottom="8dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/splashCard"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.355">
+
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4"
+            android:padding="16dp"
+            android:rowCount="2"
+            android:useDefaultMargins="true">
+
+            <!-- Example Button -->
+
+            <Button
+                android:id="@+id/btnHospital"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_row="0"
+                android:layout_rowWeight="1"
+                android:layout_column="0"
+                android:layout_columnWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/hospitals"
+                android:drawablePadding="8dp"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnSchool"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/schools"
+                android:drawablePadding="8dp"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/btnStudent"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/students"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="@string/students"
+                android:textColor="#000"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnNotification"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/notifications"
+                android:drawablePadding="8dp"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/btnChat"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/chats"
+                android:drawablePadding="8dp"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/btnBill"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/bills"
+                android:drawablePadding="8dp"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/btnAppointment"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/appointments"
+                android:drawablePadding="8dp"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:background="@drawable/button_blurry"
+                android:drawableTop="@drawable/settings"
+                android:drawablePadding="8dp"
+                android:gravity="center"/>
+
+        </GridLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewPost"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/splashCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_post"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
