@@ -88,4 +88,43 @@ public class StudentHandler {
         }
         return studentList;
     }
+
+
+    public List<Student> getStudentInEverySchool(){
+        List<Student> studentList = new ArrayList<>();
+
+        try {
+            if (!Python.isStarted()) {
+                Python.start(new AndroidPlatform(context));
+            }
+
+            Python py = Python.getInstance();
+            PyObject pyModule = py.getModule("Student");
+
+            PyObject result = pyModule.callAttr("getAllStudentInEverySchool");
+
+            JSONArray jsonArray = new JSONArray(result.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                String student_id = obj.optString("student_id");
+                String student_firstname = obj.optString("student_firstname");
+                String student_middlename = obj.optString("student_middlename");
+                String student_lastname = obj.optString("student_lastname");
+                String student_address = obj.optString("student_address");
+                String phone_number = obj.optString("phone_number");
+                String student_email = obj.optString("student_email");
+                String student_birthdate = obj.optString("student_birthdate");
+                String student_gender = obj.optString("student_gender");
+                String imageBase64 = obj.optString("imageBase64", null);
+
+
+                studentList.add(new Student(student_id, student_firstname, student_middlename, student_lastname,
+                        student_address, phone_number, student_email, student_birthdate, student_gender, imageBase64));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return studentList;
+    }
+
 }

@@ -91,3 +91,57 @@ def getAllStudent(school_id):
         return json.dumps({"status": "error", "message": str(e)})
 
     return json.dumps(posts)
+
+
+
+
+def getAllStudentInEverySchool():
+    posts = []
+    try:
+        if connect.connect() == "success" and connect.mydb.is_connected():
+            mycursor = connect.mydb.cursor()
+            sql = """SELECT student_id, student_firstname, student_middlename,
+                            student_lastname, student_address, phone_number,
+                            student_email, student_birthdate, student_gender,
+                            student_profile
+                     FROM Student"""
+            mycursor.execute(sql)
+            rows = mycursor.fetchall()
+
+            for row in rows:
+                student_id = row[0]
+                student_firstname = row[1]
+                student_middlename = row[2]
+                student_lastname = row[3]
+                student_address = row[4]
+                phone_number = row[5]
+                student_email = row[6]
+                student_birthdate = row[7]
+                student_gender = row[8]
+                student_profile = row[9]
+
+                if student_profile:
+                    img_base64 = base64.b64encode(student_profile).decode("utf-8")
+                else:
+                    img_base64 = None
+
+                posts.append({
+                    "student_id": student_id,
+                    "student_firstname": student_firstname,
+                    "student_middlename": student_middlename,
+                    "student_lastname": student_lastname,
+                    "student_address": student_address,
+                    "phone_number": phone_number,
+                    "student_email": student_email,
+                    "student_birthdate": str(student_birthdate),
+                    "student_gender": student_gender,
+                    "imageBase64": img_base64
+                })
+
+            mycursor.close()
+            connect.mydb.close()
+
+    except Exception as e:
+        return json.dumps({"status": "error", "message": str(e)})
+
+    return json.dumps(posts)

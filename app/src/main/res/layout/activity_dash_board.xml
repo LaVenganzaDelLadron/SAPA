@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/btnProfile"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_margin="15dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/circle_mask"

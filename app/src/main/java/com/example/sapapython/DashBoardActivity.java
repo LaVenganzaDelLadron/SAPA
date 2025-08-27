@@ -73,6 +73,11 @@ public class DashBoardActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btnStudent.setOnClickListener(v -> {
+            Intent intent = new Intent(DashBoardActivity.this, StudentActivity.class);
+            startActivity(intent);
+        });
+
         String firstname = connectionHandler.getFirstname();
         String middlename = connectionHandler.getMiddlename();
         String lastname = connectionHandler.getLastname();
