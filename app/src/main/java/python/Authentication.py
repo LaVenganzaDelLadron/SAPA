@@ -27,6 +27,7 @@ def login(email, password):
             account = mycursor.fetchone()
             if account:
                 connect.index = account["school_coordinator_id"]
+                connect.email = account['email']
                 connect.firstname = account['firstname']
                 connect.middlename = account['middlename']
                 connect.lastname = account['lastname']

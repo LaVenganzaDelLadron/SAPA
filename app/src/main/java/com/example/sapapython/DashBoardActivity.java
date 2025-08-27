@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class DashBoardActivity extends AppCompatActivity {
     private List<Post> postList;
     private Button btnHospital, btnSchool, btnStudent, btnNotification, btnChat, btnBill, btnAppointment, btnSetting;
     private TextView fullNameView;
+    private ImageView btnProfile;
     private ConnectionHandler connectionHandler = new ConnectionHandler(this);
 
     @Override
@@ -43,8 +45,12 @@ public class DashBoardActivity extends AppCompatActivity {
         btnAppointment = findViewById(R.id.btnAppointment);
         btnSetting = findViewById(R.id.btnSettings);
         fullNameView = findViewById(R.id.fullNameView);
+        btnProfile = findViewById(R.id.btnProfile);
 
-
+        btnProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(DashBoardActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
 
         btnHospital.setOnClickListener(v -> {
             Intent intent = new Intent(DashBoardActivity.this, HospitalActivity.class);

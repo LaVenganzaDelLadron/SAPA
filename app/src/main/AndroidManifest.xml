@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SAPAPYTHON">
         <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddStudentActivity"
             android:exported="false" />
         <activity

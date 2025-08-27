@@ -18,8 +18,6 @@ import java.util.List;
 
 public class StudentHandler {
     private Context context;
-    private static final String TAG = "StudentHandler";
-
     public StudentHandler(Context context){
         this.context = context;
     }
@@ -41,32 +39,21 @@ public class StudentHandler {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 student_profile.compress(Bitmap.CompressFormat.JPEG, 90, stream);
                 profileBytes = stream.toByteArray();
-                Log.d(TAG, "Profile image converted to byte array, size: " + profileBytes.length);
-            } else {
-                Log.d(TAG, "No profile image provided.");
             }
-
-            Log.d(TAG, "Adding student: " + student_firstname + " " + student_lastname + ", School ID: " + schoolId);
 
             PyObject result = pyModule.callAttr("addStudent", profileBytes, student_firstname, student_middlename,
                     student_lastname, student_address, phone_number, student_email,
                     student_birthdate, student_gender, schoolId);
 
-            Log.d(TAG, "Python addStudent result: " + result.toString());
             return result.toString();
 
         } catch (Exception e) {
-            Log.e(TAG, "Error in addStudent: " + e.getMessage(), e);
             return "Error: " + e.getMessage();
         }
     }
 
     public List<Student> getStudent(String index){
         List<Student> studentList = new ArrayList<>();
-
-        /*studentList.add(new Student("1", "Juan", "S.", "Dela Cruz", "Makati City", ""));
-        studentList.add(new Student("2", "Maria", "L.", "Santos", "Quezon City", ""));
-        studentList.add(new Student("3", "Pedro", "G.", "Reyes", "Pasig City", ""));*/
 
         try {
             if (!Python.isStarted()) {
@@ -97,7 +84,7 @@ public class StudentHandler {
                         student_address, phone_number, student_email, student_birthdate, student_gender, imageBase64));
             }
         } catch (Exception e) {
-            Log.e(TAG, "Error in getStudent: " + e.getMessage(), e);
+            e.printStackTrace();
         }
         return studentList;
     }

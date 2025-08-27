@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -22,7 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Back Button -->
         <ImageView
             android:id="@+id/backButton"
             android:layout_width="24dp"
@@ -31,12 +31,11 @@
             android:contentDescription="Back"
             app:tint="@android:color/white" />
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Add School"
+            android:text="Add Student"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -52,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/buttonLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,7 +70,7 @@
                 android:layout_marginBottom="20dp"
                 android:textColor="@android:color/black" />
 
-            <!-- Logo with edit button -->
+            <!-- Student Profile Image -->
             <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -97,7 +96,8 @@
                     app:tint="@android:color/white" />
             </FrameLayout>
 
-            <!-- Input Fields with Material Outlined Style -->
+            <!-- Input Fields (TextInputLayout) -->
+            <!-- First Name -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -115,6 +115,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Middle Name -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -132,6 +133,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Last Name -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -149,6 +151,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Address -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -166,6 +169,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Phone -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -184,6 +188,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Email -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -196,12 +201,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="51dp"
+                    android:layout_height="wrap_content"
                     android:hint="Email"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Birth Date -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -222,6 +228,7 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Gender Spinner -->
             <Spinner
                 android:id="@+id/spinnerGender"
                 android:layout_width="match_parent"
@@ -232,26 +239,41 @@
                 android:spinnerMode="dropdown"
                 android:entries="@array/gender_array"/>
 
-
-
-            <!-- Buttons -->
-            <Button
-                android:id="@+id/btnAddStudent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Student"
-                android:backgroundTint="@color/primary_color"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="12dp"/>
-
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:backgroundTint="@android:color/darker_gray"
-                android:textColor="@android:color/white"/>
         </LinearLayout>
     </ScrollView>
+
+    <!-- Fixed Buttons at Bottom -->
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnAddStudent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add Student"
+            android:backgroundTint="@color/primary_color"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ hostname = socket.gethostname()
 lan_ip = socket.gethostbyname(hostname)
 mydb = None
 index = None
+email = None
 firstname = None
 middlename = None
 lastname = None
@@ -35,6 +36,8 @@ def connect():
     return status_message
 
 
+def getEmail():
+    return email
 def getFirstname():
     return firstname
 def getMiddlename():

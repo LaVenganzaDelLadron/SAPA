@@ -152,24 +152,40 @@
                 android:layout_marginBottom="20dp"
                 android:inputType="textMultiLine" />
 
-            <!-- Buttons -->
-            <Button
-                android:id="@+id/btnAddSchool"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add School"
-                android:backgroundTint="@color/primary_color"
-                android:textColor="@android:color/white"
-                android:layout_marginBottom="12dp"/>
-
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:backgroundTint="@android:color/darker_gray"
-                android:textColor="@android:color/white"/>
         </LinearLayout>
     </ScrollView>
+    <!-- Fixed Buttons at Bottom -->
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:weightSum="2">
 
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnAddSchool"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add School"
+            android:backgroundTint="@color/primary_color"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,7 +49,18 @@ public class ConnectionHandler {
         return status;
     }
 
+    public String getEmail(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
 
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getEmail");
+        String status = result.toString();
+
+        return status;
+    }
     public String getFirstname(){
         if (!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
