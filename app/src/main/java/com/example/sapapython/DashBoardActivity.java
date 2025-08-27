@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sapapython.Handler.ConnectionHandler;
 import com.example.sapapython.adapter.PostAdapter;
 import com.example.sapapython.Handler.PostHandler;
 import com.example.sapapython.model.Post;
@@ -24,6 +26,8 @@ public class DashBoardActivity extends AppCompatActivity {
     private PostAdapter postAdapter;
     private List<Post> postList;
     private Button btnHospital, btnSchool, btnStudent, btnNotification, btnChat, btnBill, btnAppointment, btnSetting;
+    private TextView fullNameView;
+    private ConnectionHandler connectionHandler = new ConnectionHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class DashBoardActivity extends AppCompatActivity {
         btnBill = findViewById(R.id.btnBill);
         btnAppointment = findViewById(R.id.btnAppointment);
         btnSetting = findViewById(R.id.btnSettings);
+        fullNameView = findViewById(R.id.fullNameView);
 
 
 
@@ -46,18 +51,16 @@ public class DashBoardActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        btnSchool.setOnClickListener(v -> {
+            Intent intent = new Intent(DashBoardActivity.this, SchoolActivity.class);
+            startActivity(intent);
+        });
 
+        String firstname = connectionHandler.getFirstname();
+        String middlename = connectionHandler.getMiddlename();
+        String lastname = connectionHandler.getLastname();
 
-
-
-
-
-
-
-
-
-
-
+        fullNameView.setText(firstname + " " + middlename + " " + lastname);
 
 
         recyclerView = findViewById(R.id.recycleViewPost);

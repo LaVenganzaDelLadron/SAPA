@@ -36,6 +36,58 @@ public class ConnectionHandler {
     }
 
 
+    public String getIndex(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getId");
+        String status = result.toString();
+
+        return status;
+    }
+
+
+    public String getFirstname(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+    
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getFirstname");
+        String status = result.toString();
+
+        return status;
+    }
+
+    public String getMiddlename(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getMiddlename");
+        String status = result.toString();
+
+        return status;
+    }
+
+    public String getLastname(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getLastname");
+        String status = result.toString();
+
+        return status;
+    }
 
 }
 

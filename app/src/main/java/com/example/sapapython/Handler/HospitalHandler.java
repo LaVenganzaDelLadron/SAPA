@@ -44,12 +44,7 @@ public class HospitalHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return hospitalList;
-
-
-
-
     }
 
 }

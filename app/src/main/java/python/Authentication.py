@@ -20,12 +20,16 @@ def login(email, password):
     status_message = ""
     try:
         if connect.connect() == "success":
-            mycursor = connect.mydb.cursor()
+            mycursor = connect.mydb.cursor(dictionary=True)
             sql = "SELECT * FROM SchoolCoordinator WHERE email = %s AND password = %s AND is_approved = TRUE"
             values = (email, password)
             mycursor.execute(sql, values)
             account = mycursor.fetchone()
             if account:
+                connect.index = account["school_coordinator_id"]
+                connect.firstname = account['firstname']
+                connect.middlename = account['middlename']
+                connect.lastname = account['lastname']
                 status_message = "success"
             else:
                 status_message = "fail"

@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- Profile Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,32 +21,36 @@
 
             <ImageView
                 android:id="@+id/profileImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/students"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/schools"
                 android:scaleType="centerCrop"
                 android:background="@drawable/circle_mask"
                 android:clipToOutline="true" />
 
-            <TextView
-                android:id="@+id/caption"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="Caption here"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
 
+                <TextView
+                    android:id="@+id/schoolName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="School Name Here"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/schoolAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address Name Here"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
         </LinearLayout>
-
-        <!-- Post.py Image -->
-        <ImageView
-            android:id="@+id/postImage"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/hospitals" />
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

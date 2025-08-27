@@ -35,4 +35,4 @@ def getAllHospital():
     except Exception as e:
         status_message = str(e)
 
-    return json.dumps(posts)  # return as JSON string
+    return json.dumps(posts)
