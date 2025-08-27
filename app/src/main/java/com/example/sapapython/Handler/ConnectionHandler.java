@@ -100,5 +100,71 @@ public class ConnectionHandler {
         return status;
     }
 
+    public String getPhone(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getPhone");
+        String status = result.toString();
+
+        return status;
+    }
+
+    public String getBirthdate(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getBirthdate");
+        String status = result.toString();
+
+        return status;
+    }
+
+    public String getAddress(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getAddress");
+        String status = result.toString();
+
+        return status;
+    }
+
+    public String getGender(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getGender");
+        String status = result.toString();
+
+        return status;
+    }
+
+    public String getBio(){
+        if (!Python.isStarted()) {
+            Python.start(new AndroidPlatform(context));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyModule = py.getModule("connectDB");
+        PyObject result = pyModule.callAttr("getBio");
+        String status = result.toString();
+
+        return status;
+    }
+
+
 }
 

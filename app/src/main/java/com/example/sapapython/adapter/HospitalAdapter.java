@@ -33,13 +33,15 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.Hospit
     @Override
     public void onBindViewHolder(HospitalViewHolder holder, int position) {
         Hospital hospital = hospitalList.get(position);
-        holder.hospitalName.setText(hospital.getHospitalName());
-        holder.hospitalAddress.setText(hospital.getHospitalDescription());
+        holder.hospitalName.setText(hospital.getFirstName() + " " + hospital.getMiddleName() + " " + hospital.getLastName());
+        holder.hospitalAddress.setText(hospital.getLastName());
 
         if (hospital.getImageBase64() != null) {
             byte[] decoded = Base64.decode(hospital.getImageBase64(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(decoded, 0, decoded.length);
             holder.hospitalImage.setImageBitmap(bitmap);
+        }else{
+            holder.hospitalImage.setImageResource(R.drawable.hospitals);
         }
     }
 

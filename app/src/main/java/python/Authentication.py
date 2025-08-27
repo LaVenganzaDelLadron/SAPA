@@ -31,6 +31,12 @@ def login(email, password):
                 connect.firstname = account['firstname']
                 connect.middlename = account['middlename']
                 connect.lastname = account['lastname']
+                connect.phone_number = account['phone_number']
+                connect.birthdate = account['birthdate']
+                connect.address = account['address']
+                connect.gender = account['gender']
+                connect.bio = account['bio']
+
                 status_message = "success"
             else:
                 status_message = "fail"

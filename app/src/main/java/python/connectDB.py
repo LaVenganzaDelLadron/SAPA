@@ -10,6 +10,16 @@ email = None
 firstname = None
 middlename = None
 lastname = None
+phone_number = None
+birthdate = None
+address = None
+gender = None
+bio = None
+
+
+
+
+
 
 schoolProfile = None
 schoolIndex = None
@@ -35,7 +45,8 @@ def connect():
         status_message = "fail"
     return status_message
 
-
+def getId():
+    return index
 def getEmail():
     return email
 def getFirstname():
@@ -44,9 +55,16 @@ def getMiddlename():
     return middlename
 def getLastname():
     return lastname
-def getId():
-    return index
-
+def getPhone():
+    return phone_number
+def getBirthdate():
+    return birthdate
+def getAddress():
+    return address
+def getGender():
+    return gender
+def getBio():
+    return bio
 
 
 def getSchoolImage():

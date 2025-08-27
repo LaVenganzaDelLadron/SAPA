@@ -1,6 +1,7 @@
 package com.example.sapapython;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sapapython.Handler.ConnectionHandler;
+import com.example.sapapython.Handler.SchoolHandler;
 import com.example.sapapython.Handler.StudentHandler;
 import com.example.sapapython.adapter.StudentAdapter;
 import com.example.sapapython.model.Student;
@@ -19,12 +22,14 @@ import java.util.List;
 
 public class SchoolInfoActivity extends AppCompatActivity {
 
-    private ImageView schoolProfile;
+    private ImageView detailSchoolImage;
     private RecyclerView recyclerView;
     private TextView schoolName, schoolAddress, schoolBio, schoolNumber, schoolCode;
     private FloatingActionButton fabSchool;
     private StudentAdapter studentAdapter;
     private List<Student> studentList;
+    private SchoolHandler schoolHandler = new SchoolHandler(this);
+    private ConnectionHandler connectionHandler = new ConnectionHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +51,20 @@ public class SchoolInfoActivity extends AppCompatActivity {
         schoolCode = findViewById(R.id.detailSchoolZip);
         fabSchool = findViewById(R.id.fabAddSchool);
         recyclerView = findViewById(R.id.recyclerViewStudent);
+        detailSchoolImage = findViewById(R.id.detailSchoolImage);
 
         schoolName.setText(school_name);
         schoolNumber.setText(school_number);
         schoolCode.setText(school_code);
         schoolAddress.setText(school_address);
         schoolBio.setText(school_bio);
+
+        Bitmap bitmap = schoolHandler.getProfileImage(connectionHandler.getIndex());
+        if (bitmap != null) {
+            detailSchoolImage.setImageBitmap(bitmap);
+        } else {
+            detailSchoolImage.setImageResource(R.drawable.students);
+        }
 
         fabSchool.setOnClickListener(v -> {
             Intent intent = new Intent(SchoolInfoActivity.this, AddStudentActivity.class);

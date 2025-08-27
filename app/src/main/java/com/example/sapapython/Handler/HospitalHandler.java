@@ -35,11 +35,12 @@ public class HospitalHandler {
             JSONArray jsonArray = new JSONArray(result.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject obj = jsonArray.getJSONObject(i);
-                String hospital_name = obj.optString("hospital_name");
-                String hospital_address = obj.optString("hospital_address");
+                String firstname = obj.optString("firstname");
+                String middlename = obj.optString("middlename");
+                String lastname = obj.optString("lastname");
                 String imageBase64 = obj.optString("imageBase64", null);
 
-                hospitalList.add(new Hospital(hospital_name, hospital_address, imageBase64));
+                hospitalList.add(new Hospital(firstname, middlename, lastname, imageBase64));
             }
         } catch (Exception e) {
             e.printStackTrace();

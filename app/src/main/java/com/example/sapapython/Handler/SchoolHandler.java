@@ -2,6 +2,7 @@ package com.example.sapapython.Handler;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -156,7 +157,27 @@ public class SchoolHandler {
         return schoolList;
     }
 
+    public Bitmap getProfileImage(String index) {
+        byte[] imageBytes = null;
 
+        try {
+            if (!Python.isStarted()) {
+                Python.start(new AndroidPlatform(context));
+            }
+            Python py = Python.getInstance();
+            PyObject pyModule = py.getModule("School");
+            PyObject result = pyModule.callAttr("getSchoolProfileImage", index);
+            imageBytes = result.toJava(byte[].class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (imageBytes != null && imageBytes.length > 0) {
+            return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        } else {
+            return null;
+        }
+    }
 
 
 }

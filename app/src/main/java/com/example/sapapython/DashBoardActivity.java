@@ -2,6 +2,7 @@ package com.example.sapapython;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sapapython.Handler.ConnectionHandler;
+import com.example.sapapython.Handler.ProfileHandler;
 import com.example.sapapython.adapter.PostAdapter;
 import com.example.sapapython.Handler.PostHandler;
 import com.example.sapapython.model.Post;
@@ -30,6 +32,8 @@ public class DashBoardActivity extends AppCompatActivity {
     private TextView fullNameView;
     private ImageView btnProfile;
     private ConnectionHandler connectionHandler = new ConnectionHandler(this);
+    private ProfileHandler profileHandler = new ProfileHandler(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,13 @@ public class DashBoardActivity extends AppCompatActivity {
         btnSetting = findViewById(R.id.btnSettings);
         fullNameView = findViewById(R.id.fullNameView);
         btnProfile = findViewById(R.id.btnProfile);
+
+        Bitmap bitmap = profileHandler.getProfileImage(connectionHandler.getIndex());
+        if (bitmap != null) {
+            btnProfile.setImageBitmap(bitmap);
+        } else {
+            btnProfile.setImageResource(R.drawable.students);
+        }
 
         btnProfile.setOnClickListener(v -> {
             Intent intent = new Intent(DashBoardActivity.this, ProfileActivity.class);

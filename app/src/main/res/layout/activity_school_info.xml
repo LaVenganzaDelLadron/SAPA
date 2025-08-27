@@ -173,14 +173,33 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Divider / Section Title for Students -->
+
     <!-- RecyclerView for Students -->
+    <TextView
+        android:id="@+id/tvEnrolledStudents"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:text="Enrolled Students"
+        android:textColor="#212121"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/schoolDetailScroll" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewStudent"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/schoolDetailScroll"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvEnrolledStudents"
         app:layout_constraintBottom_toTopOf="@id/fabAddSchool"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

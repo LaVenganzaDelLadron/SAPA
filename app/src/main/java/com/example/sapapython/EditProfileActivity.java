@@ -8,12 +8,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,96 +22,93 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.sapapython.Handler.StudentHandler;
+import com.example.sapapython.Handler.ConnectionHandler;
+import com.example.sapapython.Handler.ProfileHandler;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 import java.util.Calendar;
 
-public class AddStudentActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
-
-    private EditText studentFirstname, studentMiddlename, studentLastname, studentAddress, studentPhone, studentEmail, studentBirthdate;
+    private EditText studentEmail, studentFirstname, studentMiddlename, studentLastname, studentPhone, studentBirthdate, studentAddress, studentBio;
+    private Button btnSaveProfile;
+    private ImageView imgCoordinatorProfile;
     private Spinner studentGender;
-    private ImageView imgProfileStudent, btnBack;
     private Bitmap bitmap = null;
-    private Button btnAdd;
-    private StudentHandler studentHandler = new StudentHandler(this);
     private ActivityResultLauncher<Intent> imagePickerLauncher;
-
+    private ConnectionHandler connectionHandler = new ConnectionHandler(this);
+    private ProfileHandler profileHandler = new ProfileHandler(this);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_student);
+        setContentView(R.layout.activity_edit_profile);
 
-        String school_id = getIntent().getStringExtra("school_id");
-
-        btnBack = findViewById(R.id.backButton);
-        btnAdd = findViewById(R.id.btnAddStudent);
+        studentEmail = findViewById(R.id.etEmail);
         studentFirstname = findViewById(R.id.etFirstName);
         studentMiddlename = findViewById(R.id.etMiddleName);
         studentLastname = findViewById(R.id.etLastName);
-        studentAddress = findViewById(R.id.etAddress);
         studentPhone = findViewById(R.id.etPhone);
-        studentEmail = findViewById(R.id.etEmail);
         studentBirthdate = findViewById(R.id.etBirthDate);
+        studentAddress = findViewById(R.id.etAddress);
+        studentBio = findViewById(R.id.etBio);
         studentGender = findViewById(R.id.spinnerGender);
-        imgProfileStudent = findViewById(R.id.imgStudentProfile);
+        btnSaveProfile = findViewById(R.id.btnSaveProfile);
+        imgCoordinatorProfile = findViewById(R.id.imgCoordinatorProfile);
 
+        studentEmail.setText(connectionHandler.getEmail());
+        studentFirstname.setText(connectionHandler.getFirstname());
+        studentMiddlename.setText(connectionHandler.getMiddlename());
+        studentLastname.setText(connectionHandler.getLastname());
+        studentPhone.setText(connectionHandler.getPhone());
+        studentBirthdate.setText(connectionHandler.getBirthdate());
+        studentAddress.setText(connectionHandler.getAddress());
+        studentBio.setText(connectionHandler.getBio());
 
+        bitmap = profileHandler.getProfileImage(connectionHandler.getIndex());
+        if (bitmap != null) {
+            imgCoordinatorProfile.setImageBitmap(bitmap);
+        } else {
+            imgCoordinatorProfile.setImageResource(R.drawable.students);
+        }
 
-
-
-        btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(AddStudentActivity.this, SchoolInfoActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        btnAdd.setOnClickListener(v -> {
+        btnSaveProfile.setOnClickListener(v -> {
+            String email = studentEmail.getText().toString();
             String firstname = studentFirstname.getText().toString();
             String middlename = studentMiddlename.getText().toString();
             String lastname = studentLastname.getText().toString();
-            String address = studentAddress.getText().toString();
             String phone = studentPhone.getText().toString();
-            String email = studentEmail.getText().toString();
             String birthdate = studentBirthdate.getText().toString();
+            String address = studentAddress.getText().toString();
             String gender = studentGender.getSelectedItem().toString();
+            String bio = studentBio.getText().toString();
 
-            if (bitmap == null){
+            if (bitmap == null) {
                 Toast.makeText(this, "Please select an image first", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             new Thread(() -> {
-                String status = studentHandler.addStudent(bitmap, firstname, middlename, lastname,
-                        address, phone, email, birthdate,
-                        gender, school_id);
-
+                String status = profileHandler.updateProfile(connectionHandler.getIndex(), bitmap, email, firstname, middlename, lastname, phone, birthdate, address, gender, bio);
                 runOnUiThread(() -> {
-                    if (status.startsWith("success")) {
-                        Toast.makeText(this, "Added Successfully", Toast.LENGTH_SHORT).show();
+                    if (status.equalsIgnoreCase("success")) {
+                        Toast.makeText(this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Failed: " + status, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show();
                     }
                 });
             }).start();
-
-
-
-
-
-
         });
 
+        // Pick image from gallery
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                         Uri imageUri = result.getData().getData();
-
                         try {
                             if (Build.VERSION.SDK_INT >= 29) {
                                 ImageDecoder.Source source = ImageDecoder.createSource(getContentResolver(), imageUri);
@@ -123,21 +118,21 @@ public class AddStudentActivity extends AppCompatActivity {
                             }
 
                             if (bitmap != null) {
-                                imgProfileStudent.setImageBitmap(bitmap);
+                                imgCoordinatorProfile.setImageBitmap(bitmap);
                                 Toast.makeText(this, "Image selected!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(this, "Failed to decode image", Toast.LENGTH_SHORT).show();
                             }
-
                         } catch (IOException e) {
                             Toast.makeText(this, "Failed to load image: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    } else {
-                        Toast.makeText(this, "Failed to load image: ", Toast.LENGTH_LONG).show();
                     }
                 }
         );
 
+        findViewById(R.id.btnAddProfile).setOnClickListener(v -> openGallery());
+
+        // Date picker
         studentBirthdate.setOnClickListener(v -> {
             final Calendar calendar = Calendar.getInstance();
             int year = calendar.get(Calendar.YEAR);
@@ -145,26 +140,17 @@ public class AddStudentActivity extends AppCompatActivity {
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    AddStudentActivity.this,
+                    EditProfileActivity.this,
                     (view, selectedYear, selectedMonth, selectedDay) -> {
-                        String date = String.format("%04d-%02d-%02d",
-                                selectedYear, (selectedMonth + 1), selectedDay);
-
+                        String date = String.format("%04d-%02d-%02d", selectedYear, (selectedMonth + 1), selectedDay);
                         studentBirthdate.setText(date);
                     },
                     year, month, day
             );
             datePickerDialog.show();
         });
-
-
-
-        findViewById(R.id.btnAddProfile).setOnClickListener(v -> openGallery());
-
-
-
-
     }
+
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");

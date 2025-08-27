@@ -1,21 +1,29 @@
 package com.example.sapapython.model;
 
 public class Hospital {
-    String HospitalName;
-    String HospitalDescription;
+    String firstName, middleName, lastName;
     String imageBase64;
 
-    public Hospital(String hospitalName, String hospitalDescription, String imageBase64) {
-        this.HospitalName = hospitalName;
-        this.HospitalDescription = hospitalDescription;
+    public Hospital(String firstName, String middleName, String lastName, String imageBase64) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
         this.imageBase64 = imageBase64;
     }
 
-    public String getHospitalName() {
-        return HospitalName;
+    public String getFirstName() {
+        return firstName;
     }
-    public String getHospitalDescription() {
-        return HospitalDescription;
+
+    public String getMiddleName() {
+        return middleName;
     }
-    public String getImageBase64(){return imageBase64;}
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getImageBase64() {
+        return imageBase64;
+    }
 }

@@ -39,7 +39,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Student student = studentList.get(position);
-        holder.studentName.setText(student.getStudent_firstname());
+        holder.studentName.setText(student.getStudent_firstname() + " " + student.getStudent_middlename() + " " + student.getStudent_lastname());
         holder.studentAddress.setText(student.getStudent_address());
 
         if (student.getImageBase64() != null) {

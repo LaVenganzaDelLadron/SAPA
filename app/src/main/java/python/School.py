@@ -19,7 +19,7 @@ def addSchool(school_logo, school_name, school_number, school_code, school_addre
                     school_logo = None
 
                 if school_logo is not None:
-                    print(f"🔍 Image size = {len(school_logo)} bytes")
+                    print(f"Image size = {len(school_logo)} bytes")
 
                 values = (school_logo, school_name, school_number, school_code, school_address, school_bio, school_coordinator_id)
                 mycursor.execute(sql, values)
@@ -73,6 +73,18 @@ def getAllSchool(school_coordinator_id):
     return json.dumps(posts)
 
 
+def getSchoolProfileImage(school_id):
+    try:
+        if connect.connect() == "success" and connect.mydb.is_connected():
+            mycursor = connect.mydb.cursor()
+            sql = "SELECT school_profile FROM School WHERE school_id = %s"
+            mycursor.execute(sql, (school_id,))
+            result = mycursor.fetchone()
+            if result and result[0]:
+                return bytes(result[0])
+    except Exception as e:
+        print("Error fetching profile image:", e)
+    return None
 
 
 
